@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- @NVLI Project Nutch-site.xml for Enews and Govt Websites crawler 
+     Version developed on Jan 10, 2017    		
+ -->
+
+<configuration>
+
+<property>
+    <name>NVLI_HOME</name>
+    <value>/media/lovey/8c9f8638-fa73-4303-9d81-004fb39f5fe8/NVLI/FrozenCode/Nutch1.11_Final_Version_For_GIT_Upload_January10</value>
+ </property>
+
+
+<property>
+    <name>http.agent.name</name>
+    <value>NVLICralwer</value>
+  </property>
+  <property>
+    <name>http.robots.agents</name>
+    <value>NVLICralwer,*</value>
+  </property>
+  <property>
+    <name>http.agent.description</name>
+    <value>RSS_TESTING</value>
+  </property>
+  <property>
+    <name>http.agent.url</name>
+    <value>http://www.cdac.in</value>
+  </property>
+  <property>
+    <name>http.agent.email</name>
+    <value>shivakarthiks@cdac.in</value>
+  </property>
+  <property>
+    <name>plugin.includes</name>
+    <value>protocol-(http|httpclient)|feed|urlfilter-regex|parse-(metatags|tika|text|html|js)|indexer-solr|index-(metatags|basic|anchor|geoip|more)|query-(basic|site|url)|response-(json|xml)|summary-basic|scoring-opic|urlnormalizer-(pass|regex|basic)</value>
+  </property>
+
+
+  <property>
+    <name>metatags.names</name>
+    <value>description,keywords</value>
+    <description> Names of the metatags to extract, separated by ','.
+  Use '*' to extract all metatags. Prefixes the names with 'metatag.'
+  in the parse-metadata. For instance to index description and keywords,
+  you need to activate the plugin index-metadata and set the value of the
+  parameter 'index.parse.md' to 'metatag.description,metatag.keywords'.
+    </description>
+  </property>
+
+<!-- used in basic indexing filter -->
+<property>
+  <name>mahout.dir</name>
+  <value>${NVLI_HOME}/resources/domainmodels</value>
+  <description>mahout traninng data dir
+  </description>
+</property>
+<!-- Used in src/java/index starts here-->
+<property>
+  <name>govtwebsites.list</name>
+  <value>in | gov | edu | nic</value>
+  <description>Govt Websites Extension List
+  </description>
+</property>
+
+<property>
+  <name>enewswebsites.list</name>
+  <value>enews | news | article | dainik | daily | timesofindia | indiatimes | esakal | rajasthanpatrika</value>
+  <description>Enews websites extension list
+  </description>
+</property>
+<!-- Used in src/java/index ends here-->
+
+
+
+<property>
+  <name>index.parse.md</name>
+  <value>metatag.description,metatag.keywords</value>
+  <description>
+  Comma-separated list of keys to be taken from the parse metadata to generate fields.
+  Can be used e.g. for 'description' or 'keywords' provided that these values are generated
+  by a parser (see parse-metatags plugin)
+  </description>
+</property>
+
+
+</configuration>

@@ -1,0 +1,295 @@
+Injecting seed URLs
+/media/shiva/f904ffe5-6d97-42b8-b615-c1a44f5351fc/test/nutch1.11TestingLovey/runtime/local/bin/nutch inject ../../CR_TEST_LANG/crawldb ../../urlsfolder/test1
+Injector: starting at 2016-06-13 21:58:29
+Injector: crawlDb: ../../CR_TEST_LANG/crawldb
+Injector: urlDir: ../../urlsfolder/test1
+Injector: Converting injected urls to crawl db entries.
+Injector: overwrite: false
+Injector: update: false
+Injector: Total number of urls rejected by filters: 0
+Injector: Total number of urls after normalization: 17
+Injector: Total new urls injected: 17
+Injector: finished at 2016-06-13 21:58:31, elapsed: 00:00:01
+Mon Jun 13 21:58:31 IST 2016 : Iteration 1 of 1
+Generating a new segment
+/media/shiva/f904ffe5-6d97-42b8-b615-c1a44f5351fc/test/nutch1.11TestingLovey/runtime/local/bin/nutch generate -D mapreduce.job.reduces=2 -D mapred.child.java.opts=-Xmx1000m -D mapreduce.reduce.speculative=false -D mapreduce.map.speculative=false -D mapreduce.map.output.compress=true ../../CR_TEST_LANG/crawldb ../../CR_TEST_LANG/segments -topN 50000 -numFetchers 1 -noFilter
+Generator: starting at 2016-06-13 21:58:32
+Generator: Selecting best-scoring urls due for fetch.
+Generator: filtering: false
+Generator: normalizing: true
+Generator: topN: 50000
+Generator: Partitioning selected urls for politeness.
+Generator: segment: ../../CR_TEST_LANG/segments/20160613215835
+Generator: finished at 2016-06-13 21:58:36, elapsed: 00:00:03
+Operating on segment : 20160613215835
+Fetching : 20160613215835
+/media/shiva/f904ffe5-6d97-42b8-b615-c1a44f5351fc/test/nutch1.11TestingLovey/runtime/local/bin/nutch fetch -D mapreduce.job.reduces=2 -D mapred.child.java.opts=-Xmx1000m -D mapreduce.reduce.speculative=false -D mapreduce.map.speculative=false -D mapreduce.map.output.compress=true -D fetcher.timelimit.mins=180 ../../CR_TEST_LANG/segments/20160613215835 -noParsing -threads 50
+Fetcher: starting at 2016-06-13 21:58:37
+Fetcher: segment: ../../CR_TEST_LANG/segments/20160613215835
+Fetcher Timelimit set for : 1465846117004
+Fetcher: threads: 50
+Fetcher: time-out divisor: 2
+QueueFeeder finished: total 17 records + hit by time limit :0
+Using queue mode : byHost
+Using queue mode : byHost
+fetching http://mciindia.org/ (queue crawl delay=5000ms)
+fetching http://fincomindia.nic.in/ (queue crawl delay=5000ms)
+Using queue mode : byHost
+fetching http://psa.gov.in/ (queue crawl delay=5000ms)
+Using queue mode : byHost
+fetching http://eci.nic.in/ (queue crawl delay=5000ms)
+Using queue mode : byHost
+fetching http://planningcommission.gov.in/ (queue crawl delay=5000ms)
+Using queue mode : byHost
+fetching http://ncst.nic.in/ (queue crawl delay=5000ms)
+Using queue mode : byHost
+fetching http://cic.gov.in/ (queue crawl delay=5000ms)
+Using queue mode : byHost
+fetching http://nhrc.nic.in/ (queue crawl delay=5000ms)
+Using queue mode : byHost
+fetching http://ncbc.nic.in/ (queue crawl delay=5000ms)
+Using queue mode : byHost
+fetching http://populationcommission.nic.in/ (queue crawl delay=5000ms)
+Using queue mode : byHost
+fetching http://presidentofindia.gov.in/ (queue crawl delay=5000ms)
+Using queue mode : byHost
+fetching http://cabsec.gov.in/ (queue crawl delay=5000ms)
+Using queue mode : byHost
+fetching http://ncw.nic.in/ (queue crawl delay=5000ms)
+Using queue mode : byHost
+fetching http://vicepresidentofindia.nic.in/ (queue crawl delay=5000ms)
+Using queue mode : byHost
+fetching http://pmindia.gov.in/ (queue crawl delay=5000ms)
+Using queue mode : byHost
+fetching http://ncm.nic.in/ (queue crawl delay=5000ms)
+Using queue mode : byHost
+fetching http://ncsc.nic.in/ (queue crawl delay=5000ms)
+Using queue mode : byHost
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=17
+Using queue mode : byHost
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=17
+Using queue mode : byHost
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=17
+Using queue mode : byHost
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=17
+Using queue mode : byHost
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=17
+Using queue mode : byHost
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=17
+Using queue mode : byHost
+robots.txt whitelist not configured.
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=17
+Using queue mode : byHost
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=17
+Using queue mode : byHost
+robots.txt whitelist not configured.
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=17
+Using queue mode : byHost
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=17
+robots.txt whitelist not configured.
+Using queue mode : byHost
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=17
+Using queue mode : byHost
+robots.txt whitelist not configured.
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=17
+Using queue mode : byHost
+robots.txt whitelist not configured.
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=17
+Using queue mode : byHost
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=17
+robots.txt whitelist not configured.
+Using queue mode : byHost
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=17
+Using queue mode : byHost
+robots.txt whitelist not configured.
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=17
+Using queue mode : byHost
+robots.txt whitelist not configured.
+robots.txt whitelist not configured.
+robots.txt whitelist not configured.
+Using queue mode : byHost
+robots.txt whitelist not configured.
+robots.txt whitelist not configured.
+robots.txt whitelist not configured.
+Thread FetcherThread has no more work available
+Thread FetcherThread has no more work available
+Using queue mode : byHost
+-finishing thread FetcherThread, activeThreads=18
+-finishing thread FetcherThread, activeThreads=17
+Using queue mode : byHost
+Thread FetcherThread has no more work available
+robots.txt whitelist not configured.
+-finishing thread FetcherThread, activeThreads=17
+robots.txt whitelist not configured.
+robots.txt whitelist not configured.
+robots.txt whitelist not configured.
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=17
+Using queue mode : byHost
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=17
+Using queue mode : byHost
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=17
+Using queue mode : byHost
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=17
+Using queue mode : byHost
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=17
+Using queue mode : byHost
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=17
+Using queue mode : byHost
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=17
+Using queue mode : byHost
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=17
+Using queue mode : byHost
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=17
+Using queue mode : byHost
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=17
+Using queue mode : byHost
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=17
+Using queue mode : byHost
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=17
+Using queue mode : byHost
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=17
+Using queue mode : byHost
+Fetcher: throughput threshold: -1
+Thread FetcherThread has no more work available
+Fetcher: throughput threshold retries: 5
+-finishing thread FetcherThread, activeThreads=17
+fetcher.maxNum.threads can't be < than 50 : using 50 instead
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=16
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=15
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=14
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=13
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=12
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=11
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=10
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=9
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=8
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=7
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=6
+-activeThreads=6, spinWaiting=0, fetchQueues.totalSize=0, fetchQueues.getQueueCount=6
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=5
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=4
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=3
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=2
+-activeThreads=2, spinWaiting=0, fetchQueues.totalSize=0, fetchQueues.getQueueCount=2
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=1
+Thread FetcherThread has no more work available
+-finishing thread FetcherThread, activeThreads=0
+-activeThreads=0, spinWaiting=0, fetchQueues.totalSize=0, fetchQueues.getQueueCount=0
+-activeThreads=0
+Fetcher: finished at 2016-06-13 21:58:41, elapsed: 00:00:04
+Parsing : 20160613215835
+/media/shiva/f904ffe5-6d97-42b8-b615-c1a44f5351fc/test/nutch1.11TestingLovey/runtime/local/bin/nutch parse -D mapreduce.job.reduces=2 -D mapred.child.java.opts=-Xmx1000m -D mapreduce.reduce.speculative=false -D mapreduce.map.speculative=false -D mapreduce.map.output.compress=true -D mapreduce.task.skip.start.attempts=2 -D mapreduce.map.skip.maxrecords=1 ../../CR_TEST_LANG/segments/20160613215835
+ParseSegment: starting at 2016-06-13 21:58:42
+ParseSegment: segment: ../../CR_TEST_LANG/segments/20160613215835
+http://ncm.nic.in/ skipped. Content of size 133953 was truncated to 65536
+Parsed (13ms):http://ncst.nic.in/
+http://ncw.nic.in/ skipped. Content of size 83658 was truncated to 65536
+Parsed (1ms):http://planningcommission.gov.in/
+Parsed (2ms):http://populationcommission.nic.in/
+http://presidentofindia.gov.in/ skipped. Content of size 112195 was truncated to 65536
+Parsed (3ms):http://psa.gov.in/
+Parsed (2ms):http://cabsec.gov.in/
+Parsed (0ms):http://cic.gov.in/
+Parsed (0ms):http://eci.nic.in/
+Parsed (4ms):http://fincomindia.nic.in/
+Parsed (2ms):http://ncsc.nic.in/
+Parsed (0ms):http://nhrc.nic.in/
+Parsed (4ms):http://vicepresidentofindia.nic.in/
+ParseSegment: finished at 2016-06-13 21:58:45, elapsed: 00:00:02
+CrawlDB update
+/media/shiva/f904ffe5-6d97-42b8-b615-c1a44f5351fc/test/nutch1.11TestingLovey/runtime/local/bin/nutch updatedb -D mapreduce.job.reduces=2 -D mapred.child.java.opts=-Xmx1000m -D mapreduce.reduce.speculative=false -D mapreduce.map.speculative=false -D mapreduce.map.output.compress=true ../../CR_TEST_LANG/crawldb ../../CR_TEST_LANG/segments/20160613215835
+CrawlDb update: starting at 2016-06-13 21:58:46
+CrawlDb update: db: ../../CR_TEST_LANG/crawldb
+CrawlDb update: segments: [../../CR_TEST_LANG/segments/20160613215835]
+CrawlDb update: additions allowed: true
+CrawlDb update: URL normalizing: false
+CrawlDb update: URL filtering: false
+CrawlDb update: 404 purging: false
+CrawlDb update: Merging segment data into db.
+CrawlDb update: finished at 2016-06-13 21:58:47, elapsed: 00:00:01
+Link inversion
+/media/shiva/f904ffe5-6d97-42b8-b615-c1a44f5351fc/test/nutch1.11TestingLovey/runtime/local/bin/nutch invertlinks ../../CR_TEST_LANG/linkdb ../../CR_TEST_LANG/segments/20160613215835
+LinkDb: starting at 2016-06-13 21:58:48
+LinkDb: linkdb: ../../CR_TEST_LANG/linkdb
+LinkDb: URL normalize: true
+LinkDb: URL filter: true
+LinkDb: internal links will be ignored.
+LinkDb: adding segment: ../../CR_TEST_LANG/segments/20160613215835
+LinkDb: finished at 2016-06-13 21:58:50, elapsed: 00:00:01
+Dedup on crawldb
+/media/shiva/f904ffe5-6d97-42b8-b615-c1a44f5351fc/test/nutch1.11TestingLovey/runtime/local/bin/nutch dedup ../../CR_TEST_LANG/crawldb
+DeduplicationJob: starting at 2016-06-13 21:58:51
+Deduplication: 0 documents marked as duplicates
+Deduplication: Updating status of duplicate urls into crawl db.
+Deduplication finished at 2016-06-13 21:58:54, elapsed: 00:00:03
+Indexing 20160613215835 to index
+/media/shiva/f904ffe5-6d97-42b8-b615-c1a44f5351fc/test/nutch1.11TestingLovey/runtime/local/bin/nutch index -Dsolr.server.url=http://localhost:8000/solr/nvli ../../CR_TEST_LANG/crawldb -linkdb ../../CR_TEST_LANG/linkdb ../../CR_TEST_LANG/segments/20160613215835
+Indexer: starting at 2016-06-13 21:58:54
+Indexer: deleting gone documents: false
+Indexer: URL filtering: false
+Indexer: URL normalizing: false
+Active IndexWriters :
+SolrIndexWriter
+	solr.server.type : Type of SolrServer to communicate with (default 'http' however options include 'cloud', 'lb' and 'concurrent')
+	solr.server.url : URL of the Solr instance (mandatory)
+	solr.zookeeper.url : URL of the Zookeeper URL (mandatory if 'cloud' value for solr.server.type)
+	solr.loadbalance.urls : Comma-separated string of Solr server strings to be used (madatory if 'lb' value for solr.server.type)
+	solr.mapping.file : name of the mapping file for fields (default solrindex-mapping.xml)
+	solr.commit.size : buffer size when sending to Solr (default 1000)
+	solr.auth : use authentication (default false)
+	solr.auth.username : username for authentication
+	solr.auth.password : password for authentication
+
+
+Indexing 11 documents
+Indexer: number of documents indexed, deleted, or skipped:
+Indexer:     11  indexed (add/update)
+Indexer: finished at 2016-06-13 21:58:58, elapsed: 00:00:03
+Cleaning up index if possible
+/media/shiva/f904ffe5-6d97-42b8-b615-c1a44f5351fc/test/nutch1.11TestingLovey/runtime/local/bin/nutch clean -Dsolr.server.url=http://localhost:8000/solr/nvli ../../CR_TEST_LANG/crawldb
+Mon Jun 13 21:59:01 IST 2016 : Finished loop with 1 iterations

@@ -1,0 +1,9 @@
+Apple is in talks with Comcast about teaming up for a streaming-television service that would use an Apple set-top box and get special treatment on Comcast's cables to ensure it bypasses congestion on the Web, people familiar with the matter say.
+
+The discussions between the world's most valuable company and the nation's largest cable provider are still in early stages and many hurdles remain. But the deal, if sealed, would mark a new level of cooperation and integration between a technology company and a cable provider to modernize TV viewing.
+
+Apple's intention is to allow users to stream live and on-demand TV programming and digital-video recordings stored in the "cloud," effectively taking the place of a traditional cable set-top box.
+
+Apple would benefit from a cable-company partner because it wants the new TV service's traffic to be separated from public Internet traffic over the "last mile"—the portion of a cable operator's pipes that connect to customers' homes, the people familiar with the matter say. That stretch of the Internet tends to get clogged when too many users in a region try to access too much bandwidth at the same time.
+
+Apple's goal would be to ensure users don't see hiccups in the service or buffering that can take place while streaming Web video, making its video the same quality as Comcast's TV transmissions to normal set-top boxes.

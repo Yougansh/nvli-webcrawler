@@ -1,0 +1,17 @@
+The Canvas Knight has been receiving rave reviews right from launch day and now that we finally got our hands on a retail unit, we decided to see how much of this was actually true. Micromax let their sudden rise to fame and fortunes get to their heads a bit last year as before the Canvas Turbo, they brought to market some pretty forgettable handsets. They were trying too hard to fill every price segment with an offering but end results were quite mediocre.
+ 
+The Canvas Knight is their latest attempt and at Rs 19,990, it competes with the likes of the Samsung Galaxy Grand 2, Gionee Elife E7 Mini and for a little more, the Moto X. Just like all Micromax smartphones, the Canvas Knight is a rebranded phone. This time around it’s based on the Wiko Highway, from the French company which is now owned primarily by a ODM in China. Their entire line-up revolves around MediaTek’s chipsets. The Knight is based entirely on the Highway, right down to the specifications, and the industrial design. It also has the same camera bump on the back.
+
+Before we dive into the full review, we thought we’d post our initial impressions of the Knight after using it for a couple of days. Based on the initial glowing reviews it received, we were expecting a flawless experience but sadly, that’s not the case.
+ 
+Let’s start with the design. The Canvas Knight looks striking in all black. It doesn’t matter that it looks a lot like a Xperia Z1 and an iPhone – the important thing is that looks good (thanks to Wiko). The aluminium chassis feels sturdy and the dual-sided glass gives it a premium look, albeit is a nightmare to keep clean. You get two SIM slots but no microSD card slot. This isn’t so bad since you do have 32GB of onboard storage.
+ 
+The display is great and at 5-inches, the Knight is perfectly manageable in your hand. This is our first encounter with an octa-core CPU as well and all we can say is – Android is not ready for eight cores. The UI functions smoothly but fire up any app and the phone heats up very quickly. Even after snapping a few pictures, the Knight heats up a lot. Then there’s the lag and intermittent crashes. Simple games like ‘Where’s my Water? 2’ exhibited intermittent slow-downs and severe jerkiness during gameplay. Many a times, the game would just crash and take us to the homescreen.
+
+The MediaTek MT6592 might post a decent score in benchmarks but that doesn’t really translate too well into real world usage. A Snapdragon 600 offers much better performance despite having a quad-core CPU due to its superior architecture.
+ 
+The Achilles’ heel of the Canvas Knight however is the battery life. Even with very careful usage, it just didn’t last the entire day. Most of the newer phones we’ve tested in the recent past have easily been able to breach the 24-hour mark, so this is a great disappointment.
+
+We’ve not had a chance to test out the 16MP camera too much but we can say that it’s a decent enough sensor for most scenarios.  It uses the same OmniVision sensor we first saw in the Gionee Elife E7 so an inevitable camera showdown is also on the cards.
+ 
+The Canvas Knight is an interesting offering in this price segment if you’re the type of person who swears by specifications. It’s a heavyweight on paper, but fails to pack a real punch once you get to use it. We will be bringing you our final verdict soon after playing around with the camera some more and testing the performance for a couple more days, so stay tuned.
