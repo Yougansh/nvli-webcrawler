@@ -7,17 +7,17 @@
 
 <property>
     <name>NVLI_HOME</name>
-    <value>/media/lovey/8c9f8638-fa73-4303-9d81-004fb39f5fe8/NVLI/FrozenCode/Nutch1.11_Final_6Jan2017</value>
+    <value>/media/lovey/8c9f8638-fa73-4303-9d81-004fb39f5fe8/NVLI/FrozenCode/Nutch1.11_Final_Version_For_GIT_Upload_January10</value>
  </property>
 
 
 <property>
     <name>http.agent.name</name>
-    <value>testnutch</value>
+    <value>NVLICralwer</value>
   </property>
   <property>
     <name>http.robots.agents</name>
-    <value>testnutch,*</value>
+    <value>NVLICralwer,*</value>
   </property>
   <property>
     <name>http.agent.description</name>
