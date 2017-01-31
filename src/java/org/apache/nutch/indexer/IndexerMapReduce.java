@@ -17,6 +17,9 @@
 package org.apache.nutch.indexer;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -53,12 +56,10 @@ import org.apache.nutch.protocol.Content;
 import org.apache.nutch.scoring.ScoringFilterException;
 import org.apache.nutch.scoring.ScoringFilters;
 
-public class IndexerMapReduce extends Configured implements
-		Mapper<Text, Writable, Text, NutchWritable>,
-		Reducer<Text, NutchWritable, Text, NutchIndexAction> {
+public class IndexerMapReduce extends Configured
+		implements Mapper<Text, Writable, Text, NutchWritable>, Reducer<Text, NutchWritable, Text, NutchIndexAction> {
 
-	public static final Logger LOG = LoggerFactory
-			.getLogger(IndexerMapReduce.class);
+	public static final Logger LOG = LoggerFactory.getLogger(IndexerMapReduce.class);
 
 	public static final String INDEXER_PARAMS = "indexer.additional.params";
 	public static final String INDEXER_DELETE = "indexer.delete";
@@ -67,6 +68,7 @@ public class IndexerMapReduce extends Configured implements
 	public static final String URL_FILTERING = "indexer.url.filters";
 	public static final String URL_NORMALIZING = "indexer.url.normalizers";
 	public static final String INDEXER_BINARY_AS_BASE64 = "indexer.binary.base64";
+
 
 	private boolean skip = false;
 	private boolean delete = false;
@@ -84,16 +86,14 @@ public class IndexerMapReduce extends Configured implements
 	private URLFilters urlFilters;
 
 	/** Predefined action to delete documents from the index */
-	private static final NutchIndexAction DELETE_ACTION = new NutchIndexAction(
-			null, NutchIndexAction.DELETE);
+	private static final NutchIndexAction DELETE_ACTION = new NutchIndexAction(null, NutchIndexAction.DELETE);
 
 	public void configure(JobConf job) {
 		setConf(job);
 		this.filters = new IndexingFilters(getConf());
 		this.scfilters = new ScoringFilters(getConf());
 		this.delete = job.getBoolean(INDEXER_DELETE, false);
-		this.deleteRobotsNoIndex = job.getBoolean(
-				INDEXER_DELETE_ROBOTS_NOINDEX, false);
+		this.deleteRobotsNoIndex = job.getBoolean(INDEXER_DELETE_ROBOTS_NOINDEX, false);
 		this.skip = job.getBoolean(INDEXER_SKIP_NOTMODIFIED, false);
 		this.base64 = job.getBoolean(INDEXER_BINARY_AS_BASE64, false);
 
@@ -101,8 +101,7 @@ public class IndexerMapReduce extends Configured implements
 		filter = job.getBoolean(URL_FILTERING, false);
 
 		if (normalize) {
-			urlNormalizers = new URLNormalizers(getConf(),
-					URLNormalizers.SCOPE_INDEXER);
+			urlNormalizers = new URLNormalizers(getConf(), URLNormalizers.SCOPE_INDEXER);
 		}
 
 		if (filter) {
@@ -128,8 +127,7 @@ public class IndexerMapReduce extends Configured implements
 			try {
 
 				// normalize and trim the url
-				normalized = urlNormalizers.normalize(url,
-						URLNormalizers.SCOPE_INDEXER);
+				normalized = urlNormalizers.normalize(url, URLNormalizers.SCOPE_INDEXER);
 				normalized = normalized.trim();
 			} catch (Exception e) {
 				LOG.warn("Skipping " + url + ":" + e);
@@ -162,8 +160,7 @@ public class IndexerMapReduce extends Configured implements
 		return url;
 	}
 
-	public void map(Text key, Writable value,
-			OutputCollector<Text, NutchWritable> output, Reporter reporter)
+	public void map(Text key, Writable value, OutputCollector<Text, NutchWritable> output, Reporter reporter)
 			throws IOException {
 
 		String urlString = filterUrl(normalizeUrl(key.toString()));
@@ -176,9 +173,8 @@ public class IndexerMapReduce extends Configured implements
 		output.collect(key, new NutchWritable(value));
 	}
 
-	public void reduce(Text key, Iterator<NutchWritable> values,
-			OutputCollector<Text, NutchIndexAction> output, Reporter reporter)
-			throws IOException {
+	public void reduce(Text key, Iterator<NutchWritable> values, OutputCollector<Text, NutchIndexAction> output,
+			Reporter reporter) throws IOException {
 		Inlinks inlinks = null;
 		CrawlDatum dbDatum = null;
 		CrawlDatum fetchDatum = null;
@@ -204,8 +200,7 @@ public class IndexerMapReduce extends Configured implements
 						|| CrawlDatum.STATUS_PARSE_META == datum.getStatus()) {
 					continue;
 				} else {
-					throw new RuntimeException("Unexpected status: "
-							+ datum.getStatus());
+					throw new RuntimeException("Unexpected status: " + datum.getStatus());
 				}
 			} else if (value instanceof ParseData) {
 				parseData = (ParseData) value;
@@ -217,12 +212,10 @@ public class IndexerMapReduce extends Configured implements
 					String robotsMeta = parseData.getMeta("robots");
 
 					// Has it a noindex for this url?
-					if (robotsMeta != null
-							&& robotsMeta.toLowerCase().indexOf("noindex") != -1) {
+					if (robotsMeta != null && robotsMeta.toLowerCase().indexOf("noindex") != -1) {
 						// Delete it!
 						output.collect(key, DELETE_ACTION);
-						reporter.incrCounter("IndexerStatus",
-								"deleted (robots=noindex)", 1);
+						reporter.incrCounter("IndexerStatus", "deleted (robots=noindex)", 1);
 						return;
 					}
 				}
@@ -254,8 +247,7 @@ public class IndexerMapReduce extends Configured implements
 			}
 		}
 
-		if (fetchDatum == null || dbDatum == null || parseText == null
-				|| parseData == null) {
+		if (fetchDatum == null || dbDatum == null || parseText == null || parseData == null) {
 			return; // only have inlinks
 		}
 
@@ -272,8 +264,7 @@ public class IndexerMapReduce extends Configured implements
 			return;
 		}
 
-		if (!parseData.getStatus().isSuccess()
-				|| fetchDatum.getStatus() != CrawlDatum.STATUS_FETCH_SUCCESS) {
+		if (!parseData.getStatus().isSuccess() || fetchDatum.getStatus() != CrawlDatum.STATUS_FETCH_SUCCESS) {
 			return;
 		}
 
@@ -282,34 +273,28 @@ public class IndexerMapReduce extends Configured implements
 		 * Code for Identifying eNews and GovtWebsite and setting the id
 		 * accordingly
 		 */
-		String identifier = "";
+		
 
-		if (IdUtils.isGovtWebsite(key.toString(),getConf())) {
-			String cleanedurl = key.toString();
-			cleanedurl = IdUtils.cleanUrls(cleanedurl);
+		
 
-			identifier = "GOVW_" + cleanedurl;
-			doc.add("hostname",cleanedurl.substring(0,cleanedurl.indexOf('_')).toUpperCase());
-			doc.add("identifier", identifier);
-			doc.add("resourceType", "GOVW");
-		} else 	if (IdUtils.isEnewsWebsite(key.toString(),getConf())) {
-			String cleanedurl = key.toString();
-			cleanedurl = IdUtils.cleanUrls(cleanedurl);
+		URL u_modified = IdUtils.getUrl(key.toString());;
+		String cleanedurl = IdUtils.cleanUrls(u_modified);
+		IdUtils.getIdentifier(cleanedurl, getConf());
+		doc.add("identifier", IdUtils.IDENTIFIER);
+		doc.add("resourceType", IdUtils.RESOURCETYPE);
 
-			identifier = "ENEW_" + cleanedurl;
-			doc.add("hostname",cleanedurl.substring(0,cleanedurl.indexOf('_')).toUpperCase());
-			doc.add("identifier", identifier);
-			doc.add("resourceType", "ENEW");
-		} else {
-			String cleanedurl = key.toString();
-			cleanedurl = IdUtils.cleanUrls(cleanedurl);
-
-			identifier = "UDEF_" + cleanedurl;
-			doc.add("hostname",cleanedurl.substring(0,cleanedurl.indexOf('_')).toUpperCase());
-			doc.add("identifier", identifier);
-			doc.add("resourceType", "UDEF");
+		// Hostname Identifier from cleaned url
+		try {
+			IdUtils.getHostname(IdUtils.RESOURCETYPE, u_modified, getConf());
+		} catch (URISyntaxException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
+		doc.add("hostname", IdUtils.IDENTIFIED_HOSTNAME);
 		/* ends */
+		
+
+		
 		doc.add("id", key.toString());
 
 		final Metadata metadata = parseData.getContentMeta();
@@ -327,8 +312,7 @@ public class IndexerMapReduce extends Configured implements
 
 			// extract information from dbDatum and pass it to
 			// fetchDatum so that indexing filters can use it
-			final Text url = (Text) dbDatum.getMetaData().get(
-					Nutch.WRITABLE_REPR_URL_KEY);
+			final Text url = (Text) dbDatum.getMetaData().get(Nutch.WRITABLE_REPR_URL_KEY);
 			if (url != null) {
 				// Representation URL also needs normalization and filtering.
 				// If repr URL is excluded by filters we still accept this
@@ -339,8 +323,7 @@ public class IndexerMapReduce extends Configured implements
 				String urlString = filterUrl(normalizeUrl(url.toString()));
 				if (urlString != null) {
 					url.set(urlString);
-					fetchDatum.getMetaData().put(Nutch.WRITABLE_REPR_URL_KEY,
-							url);
+					fetchDatum.getMetaData().put(Nutch.WRITABLE_REPR_URL_KEY, url);
 				}
 			}
 			// run indexing filters
@@ -355,16 +338,14 @@ public class IndexerMapReduce extends Configured implements
 
 		// skip documents discarded by indexing filters
 		if (doc == null) {
-			reporter.incrCounter("IndexerStatus",
-					"skipped by indexing filters", 1);
+			reporter.incrCounter("IndexerStatus", "skipped by indexing filters", 1);
 			return;
 		}
 
 		float boost = 1.0f;
 		// run scoring filters
 		try {
-			boost = this.scfilters.indexerScore(key, doc, dbDatum, fetchDatum,
-					parse, inlinks, boost);
+			boost = this.scfilters.indexerScore(key, doc, dbDatum, fetchDatum, parse, inlinks, boost);
 		} catch (final ScoringFilterException e) {
 			reporter.incrCounter("IndexerStatus", "errors (ScoringFilter)", 1);
 			if (LOG.isWarnEnabled()) {
@@ -383,8 +364,7 @@ public class IndexerMapReduce extends Configured implements
 
 			// optionally encode as base64
 			if (base64) {
-				binary = Base64.encodeBase64String(StringUtils
-						.getBytesUtf8(binary));
+				binary = Base64.encodeBase64String(StringUtils.getBytesUtf8(binary));
 			}
 
 			doc.add("binaryContent", binary);
@@ -392,16 +372,15 @@ public class IndexerMapReduce extends Configured implements
 
 		reporter.incrCounter("IndexerStatus", "indexed (add/update)", 1);
 
-		NutchIndexAction action = new NutchIndexAction(doc,
-				NutchIndexAction.ADD);
+		NutchIndexAction action = new NutchIndexAction(doc, NutchIndexAction.ADD);
 		output.collect(key, action);
 	}
 
 	public void close() throws IOException {
 	}
 
-	public static void initMRJob(Path crawlDb, Path linkDb,
-			Collection<Path> segments, JobConf job, boolean addBinaryContent) {
+	public static void initMRJob(Path crawlDb, Path linkDb, Collection<Path> segments, JobConf job,
+			boolean addBinaryContent) {
 
 		LOG.info("IndexerMapReduce: crawldb: {}", crawlDb);
 
@@ -410,23 +389,17 @@ public class IndexerMapReduce extends Configured implements
 
 		for (final Path segment : segments) {
 			LOG.info("IndexerMapReduces: adding segment: {}", segment);
-			FileInputFormat.addInputPath(job, new Path(segment,
-					CrawlDatum.FETCH_DIR_NAME));
-			FileInputFormat.addInputPath(job, new Path(segment,
-					CrawlDatum.PARSE_DIR_NAME));
-			FileInputFormat.addInputPath(job, new Path(segment,
-					ParseData.DIR_NAME));
-			FileInputFormat.addInputPath(job, new Path(segment,
-					ParseText.DIR_NAME));
+			FileInputFormat.addInputPath(job, new Path(segment, CrawlDatum.FETCH_DIR_NAME));
+			FileInputFormat.addInputPath(job, new Path(segment, CrawlDatum.PARSE_DIR_NAME));
+			FileInputFormat.addInputPath(job, new Path(segment, ParseData.DIR_NAME));
+			FileInputFormat.addInputPath(job, new Path(segment, ParseText.DIR_NAME));
 
 			if (addBinaryContent) {
-				FileInputFormat.addInputPath(job, new Path(segment,
-						Content.DIR_NAME));
+				FileInputFormat.addInputPath(job, new Path(segment, Content.DIR_NAME));
 			}
 		}
 
-		FileInputFormat.addInputPath(job, new Path(crawlDb,
-				CrawlDb.CURRENT_NAME));
+		FileInputFormat.addInputPath(job, new Path(crawlDb, CrawlDb.CURRENT_NAME));
 
 		if (linkDb != null) {
 			Path currentLinkDb = new Path(linkDb, LinkDb.CURRENT_NAME);
@@ -434,14 +407,11 @@ public class IndexerMapReduce extends Configured implements
 				if (FileSystem.get(job).exists(currentLinkDb)) {
 					FileInputFormat.addInputPath(job, currentLinkDb);
 				} else {
-					LOG.warn(
-							"Ignoring linkDb for indexing, no linkDb found in path: {}",
-							linkDb);
+					LOG.warn("Ignoring linkDb for indexing, no linkDb found in path: {}", linkDb);
 				}
 			} catch (IOException e) {
 				LOG.warn("Failed to use linkDb ({}) for indexing: {}", linkDb,
-						org.apache.hadoop.util.StringUtils
-								.stringifyException(e));
+						org.apache.hadoop.util.StringUtils.stringifyException(e));
 			}
 		}
 

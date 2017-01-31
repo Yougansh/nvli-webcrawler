@@ -17,12 +17,15 @@
 
 package org.apache.nutch.indexer;
 
+import java.net.URL;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.hadoop.conf.Configured;
+
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapred.JobConf;
 import org.apache.hadoop.util.Tool;
@@ -59,8 +62,7 @@ import org.slf4j.LoggerFactory;
 
 public class IndexingFiltersChecker extends Configured implements Tool {
 
-	public static final Logger LOG = LoggerFactory
-			.getLogger(IndexingFiltersChecker.class);
+	public static final Logger LOG = LoggerFactory.getLogger(IndexingFiltersChecker.class);
 
 	public IndexingFiltersChecker() {
 
@@ -123,8 +125,7 @@ public class IndexingFiltersChecker extends Configured implements Tool {
 		ProtocolOutput output = protocol.getProtocolOutput(turl, datum);
 
 		if (!output.getStatus().isSuccess()) {
-			System.out.println("Fetch failed with protocol status: "
-					+ output.getStatus());
+			System.out.println("Fetch failed with protocol status: " + output.getStatus());
 			return 0;
 		}
 
@@ -142,8 +143,7 @@ public class IndexingFiltersChecker extends Configured implements Tool {
 		}
 
 		// store the guessed content type in the crawldatum
-		datum.getMetaData().put(new Text(Metadata.CONTENT_TYPE),
-				new Text(contentType));
+		datum.getMetaData().put(new Text(Metadata.CONTENT_TYPE), new Text(contentType));
 
 		if (ParseSegment.isTruncated(content)) {
 			LOG.warn("Content is truncated, parse may fail!");
@@ -168,32 +168,16 @@ public class IndexingFiltersChecker extends Configured implements Tool {
 		 * Code for Identifying eNews and GovtWebsite and setting the id
 		 * accordingly
 		 */
-		String identifier = "UDEF_";
-		if (IdUtils.isGovtWebsite(url,getConf())) {
-			String cleanedurl = url;
-			cleanedurl = IdUtils.cleanUrls(cleanedurl);
 
-			identifier = "GOVW_" + cleanedurl;
-			doc.add("hostname",cleanedurl.substring(0,cleanedurl.indexOf('_')).toUpperCase());
-			doc.add("identifier", identifier);
-			doc.add("resourceType", "GOVW");
-		} else if (IdUtils.isEnewsWebsite(url,getConf())) {
-			String cleanedurl = url;
-			cleanedurl = IdUtils.cleanUrls(cleanedurl);
+		URL u_modified = IdUtils.getUrl(url);
+		String cleanedurl = IdUtils.cleanUrls(u_modified);
+		IdUtils.getIdentifier(cleanedurl, getConf());
+		doc.add("identifier", IdUtils.IDENTIFIER);
+		doc.add("resourceType", IdUtils.RESOURCETYPE);
 
-			identifier = "ENEW_" + cleanedurl;
-			doc.add("hostname",cleanedurl.substring(0,cleanedurl.indexOf('_')).toUpperCase());
-			doc.add("identifier", identifier);
-			doc.add("resourceType", "ENEW");
-		} else  {
-			String cleanedurl = url;
-			cleanedurl = IdUtils.cleanUrls(cleanedurl);
-
-			identifier = "UDEF_" + cleanedurl;
-			doc.add("hostname",cleanedurl.substring(0,cleanedurl.indexOf('_')).toUpperCase());
-			doc.add("identifier", identifier);
-			doc.add("resourceType", "UDEF");
-		}
+		// Hostname Identifier from cleaned url
+		IdUtils.getHostname(IdUtils.RESOURCETYPE, u_modified, getConf());
+		doc.add("hostname", IdUtils.IDENTIFIED_HOSTNAME);
 		/* ends */
 		doc.add("id", url);
 		Text urlText = new Text(url);
@@ -211,18 +195,14 @@ public class IndexingFiltersChecker extends Configured implements Tool {
 			return -1;
 		}
 
-		byte[] signature = SignatureFactory.getSignature(getConf()).calculate(
-				content, parse);
-		parse.getData().getContentMeta()
-				.set(Nutch.SIGNATURE_KEY, StringUtil.toHexString(signature));
-		String digest = parse.getData().getContentMeta()
-				.get(Nutch.SIGNATURE_KEY);
+		byte[] signature = SignatureFactory.getSignature(getConf()).calculate(content, parse);
+		parse.getData().getContentMeta().set(Nutch.SIGNATURE_KEY, StringUtil.toHexString(signature));
+		String digest = parse.getData().getContentMeta().get(Nutch.SIGNATURE_KEY);
 		doc.add("digest", digest);
 
 		// call the scoring filters
 		try {
-			scfilters.passScoreAfterParsing(turl, content,
-					parseResult.get(turl));
+			scfilters.passScoreAfterParsing(turl, content, parseResult.get(turl));
 		} catch (Exception e) {
 			LOG.warn("Couldn't pass score, url {} ({})", turl, e);
 		}
@@ -243,10 +223,8 @@ public class IndexingFiltersChecker extends Configured implements Tool {
 			if (values != null) {
 				for (Object value : values) {
 					String str = value.toString();
-					int minText = dumpText ? str.length() : Math.min(100,
-							str.length());
-					System.out.println(fname + " :\t"
-							+ str.substring(0, minText));
+					int minText = dumpText ? str.length() : Math.min(100, str.length());
+					System.out.println(fname + " :\t" + str.substring(0, minText));
 				}
 			}
 		}
@@ -262,8 +240,7 @@ public class IndexingFiltersChecker extends Configured implements Tool {
 	}
 
 	public static void main(String[] args) throws Exception {
-		final int res = ToolRunner.run(NutchConfiguration.create(),
-				new IndexingFiltersChecker(), args);
+		final int res = ToolRunner.run(NutchConfiguration.create(), new IndexingFiltersChecker(), args);
 		System.exit(res);
 	}
 }
