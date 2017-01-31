@@ -1,25 +1,23 @@
 <?xml version="1.0"?>
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
 
-<!-- @NVLI Project Nutch-site.xml for Enews and Govt Websites crawler 
-     Version developed on Jan 10, 2017    		
- -->
+<!-- Put site-specific property overrides in this file. -->
 
 <configuration>
 
 <property>
     <name>NVLI_HOME</name>
-    <value>/media/lovey/8c9f8638-fa73-4303-9d81-004fb39f5fe8/NVLI/FrozenCode/Nutch1.11_Final_Version_For_GIT_Upload_January10</value>
+    <value>/media/lovey/8c9f8638-fa73-4303-9d81-004fb39f5fe8/NVLI/FrozenCode/Nutch1.11_Final_6Jan2017</value>
  </property>
 
 
 <property>
     <name>http.agent.name</name>
-    <value>NVLICralwer</value>
+    <value>testnutch</value>
   </property>
   <property>
     <name>http.robots.agents</name>
-    <value>NVLICralwer,*</value>
+    <value>testnutch,*</value>
   </property>
   <property>
     <name>http.agent.description</name>
@@ -38,7 +36,6 @@
     <value>protocol-(http|httpclient)|feed|urlfilter-regex|parse-(metatags|tika|text|html|js)|indexer-solr|index-(metatags|basic|anchor|geoip|more)|query-(basic|site|url)|response-(json|xml)|summary-basic|scoring-opic|urlnormalizer-(pass|regex|basic)</value>
   </property>
 
-
   <property>
     <name>metatags.names</name>
     <value>description,keywords</value>
@@ -50,28 +47,39 @@
     </description>
   </property>
 
-<!-- used in basic indexing filter -->
 <property>
   <name>mahout.dir</name>
   <value>${NVLI_HOME}/resources/domainmodels</value>
   <description>mahout traninng data dir
   </description>
 </property>
-<!-- Used in src/java/index starts here-->
+
 <property>
   <name>govtwebsites.list</name>
-  <value>in | gov | edu | nic</value>
+  <value>in:gov:edu:nic</value>
   <description>Govt Websites Extension List
   </description>
 </property>
 
 <property>
   <name>enewswebsites.list</name>
-  <value>enews | news | article | dainik | daily | timesofindia | indiatimes | esakal | rajasthanpatrika</value>
+  <value>enews:news:article:dainik:daily:timesofindia:indiatimes:esakal:rajasthanpatrika:punjabkesari:sikkimexpress:deccanherald:patrika:prahaar:jaihinddaily:assamtribune:aajkaal:assamchronicle:mathrubhumi:dinakaran:bartamanpatrika:manoramaonline:hindustantimes:business-standard:magicbricks:dailypost:ebela:sandesh:ganashakti:hosadigantha:ifp:indianexpress:kalantar:lokmat:metrovaartha:thehindubusinessline:naidunia:statetimes:janmabhoominewspapers:sambhaavnews:sirajlive:crazydomains:veekshanam:uttarbangasambad:afternoondc:ahmedabadmirror:anandabazar:arunachalfront:asianage:bangaloremirror:dailypioneer:deepika </value>
   <description>Enews websites extension list
   </description>
 </property>
-<!-- Used in src/java/index ends here-->
+
+<property>
+  <name>enewswebsites.list.specificenews</name>
+  <value>daily:timesofindia:indiatimes:esakal:rajasthanpatrika:punjabkesari:sikkimexpress:deccanherald:patrika:prahaar:jaihinddaily:assamtribune:aajkaal:assamchronicle:mathrubhumi:dinakaran:bartamanpatrika:manoramaonline:hindustantimes:business-standard:magicbricks:dailypost:ebela:sandesh:ganashakti:hosadigantha:ifp:indianexpress:kalantar:lokmat:metrovaartha:thehindubusinessline:naidunia:statetimes:janmabhoominewspapers:sambhaavnews:sirajlive:crazydomains:veekshanam:uttarbangasambad:afternoondc:ahmedabadmirror:anandabazar:arunachalfront:asianage:bangaloremirror:dailypioneer:deepika</value>
+  <description>Enews websites extension list for Hostname
+  </description>
+</property>
+<property>
+  <name>govwebsites.list.specificgovt</name>
+  <value>:</value>
+  <description>Govw websites extension list for Hostname
+  </description>
+</property>
 
 
 
